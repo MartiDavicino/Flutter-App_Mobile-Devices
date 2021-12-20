@@ -1,7 +1,7 @@
 class BurgerCatalog {
-  List<Burger> burgers;
+  //List<Burger> burgers;
 
-  BurgerCatalog({this.burgers});
+  //BurgerCatalog({this.burgers});
 }
 
 class Burger {
