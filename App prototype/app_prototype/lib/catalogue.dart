@@ -4,11 +4,18 @@ class Catalogue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Catalogue", style: TextStyle(fontSize: 30)),
+      ),
       body: Container(
         child: GridView.count(
           childAspectRatio: 2 / 2.2,
           crossAxisCount: 2,
           children: const [
+            BurgerCard("Burger #1"),
+            BurgerCard("Burger #2"),
+            BurgerCard("Burger #3"),
+            BurgerCard("Burger #4"),
             BurgerCard("Burger #1"),
             BurgerCard("Burger #2"),
             BurgerCard("Burger #3"),
@@ -30,8 +37,12 @@ class BurgerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.all(3),
-        color: Colors.blueAccent,
+      margin: const EdgeInsets.all(3),
+      color: Colors.blueAccent,
+      child: InkWell(
+        onTap: () {
+          print("Burger card tapped");
+        },
         child: Column(
           children: [
             Container(
@@ -48,6 +59,8 @@ class BurgerCard extends StatelessWidget {
               ),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

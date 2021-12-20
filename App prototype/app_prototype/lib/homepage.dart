@@ -1,3 +1,4 @@
+import 'package:app_prototype/catalogue.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,9 +36,15 @@ class HomePageButton extends StatelessWidget {
       height: 60,
       width: 200,
       margin: EdgeInsets.fromLTRB(0, 60, 0, 60),
-      child: FlatButton(
+      child: RaisedButton(
         color: Colors.greenAccent,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => Catalogue(),
+            ),
+          );
+        },
         child: Text(
           text,
           style: const TextStyle(
