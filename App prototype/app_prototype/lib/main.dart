@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core_web/firebase_core_web.dart';
 
-void main() => runApp(MaterialApp(
-      title: "Burger Collection",
-      home: Catalogue(),
-      debugShowCheckedModeBanner: false,
-    ));
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
+    title: "Burger Collection",
+    home: Catalogue(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
 
 class Catalogue extends StatefulWidget {
   @override
