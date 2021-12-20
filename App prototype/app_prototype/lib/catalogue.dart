@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
 
@@ -13,14 +15,14 @@ class Catalogue extends StatelessWidget {
           childAspectRatio: 2 / 2.2,
           crossAxisCount: 2,
           children: const [
-            BurgerCard("Burger #1"),
-            BurgerCard("Burger #2"),
-            BurgerCard("Burger #3"),
-            BurgerCard("Burger #4"),
-            BurgerCard("Burger #1"),
-            BurgerCard("Burger #2"),
-            BurgerCard("Burger #3"),
-            BurgerCard("Burger #4"),
+            BurgerCard("Burger #1", 1),
+            BurgerCard("Burger #2", 2),
+            BurgerCard("Burger #3", 3),
+            BurgerCard("Burger #4", 4),
+            BurgerCard("Burger #1", 1),
+            BurgerCard("Burger #2", 2),
+            BurgerCard("Burger #3", 3),
+            BurgerCard("Burger #4", 4),
           ],
         ),
       ),
@@ -30,8 +32,10 @@ class Catalogue extends StatelessWidget {
 
 class BurgerCard extends StatelessWidget {
   final String name;
+  final int img;
   const BurgerCard(
-    this.name, {
+    this.name,
+    this.img, {
     Key? key,
   }) : super(key: key);
 
@@ -56,6 +60,9 @@ class BurgerCard extends StatelessWidget {
               height: 180,
               width: 180,
               color: Colors.grey,
+              child: Image(
+                image: AssetImage("assets/" + img.toString() + "png"),
+              ),
             ),
             Text(
               name,
