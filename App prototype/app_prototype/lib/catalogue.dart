@@ -1,3 +1,4 @@
+import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
 
 class Catalogue extends StatelessWidget {
@@ -42,6 +43,11 @@ class BurgerCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           print("Burger card tapped");
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => BurgerDetails(name),
+            ),
+          );
         },
         child: Column(
           children: [

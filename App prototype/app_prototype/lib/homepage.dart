@@ -1,4 +1,5 @@
 import 'package:app_prototype/catalogue.dart';
+import 'package:app_prototype/aboutus.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,9 +14,12 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             Header("Burger Collection"),
-            HomePageButton("About Us"),
-            HomePageButton("Catalogue"),
-            HomePageButton("Telmo link"),
+            HomePageButton(
+                "About Us", MaterialPageRoute(builder: (context) => AboutUs())),
+            HomePageButton("Catalogue",
+                MaterialPageRoute(builder: (context) => Catalogue())),
+            HomePageButton("Telmo link",
+                MaterialPageRoute(builder: (context) => AboutUs())),
           ],
         ),
       ),
@@ -25,8 +29,10 @@ class HomePage extends StatelessWidget {
 
 class HomePageButton extends StatelessWidget {
   final String text;
+  final MaterialPageRoute route;
   const HomePageButton(
-    this.text, {
+    this.text,
+    this.route, {
     Key? key,
   }) : super(key: key);
 
@@ -39,11 +45,7 @@ class HomePageButton extends StatelessWidget {
       child: RaisedButton(
         color: Colors.greenAccent,
         onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => Catalogue(),
-            ),
-          );
+          Navigator.of(context).push(route);
         },
         child: Text(
           text,
