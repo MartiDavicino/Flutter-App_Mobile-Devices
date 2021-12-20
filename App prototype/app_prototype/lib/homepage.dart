@@ -36,7 +36,7 @@ class HomePageButton extends StatelessWidget {
       width: 200,
       margin: EdgeInsets.fromLTRB(0, 60, 0, 60),
       child: FlatButton(
-        color: Colors.cyan,
+        color: Colors.greenAccent,
         onPressed: () {},
         child: Text(
           text,
