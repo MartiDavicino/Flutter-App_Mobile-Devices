@@ -8,20 +8,55 @@ class BurgerDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.grey,
-            height: 300,
-            width: 300,
+      body: Container(
+        margin: EdgeInsets.all(50),
+        decoration: const BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
           ),
-          Container(
-            child: Text(name),
-          ),
-          Container(
-            child: Text("Hmm que guena la borgir"),
-          )
-        ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.all(50),
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(50),
+                ),
+              ),
+              height: 500,
+              width: 500,
+            ),
+            Container(
+              margin: const EdgeInsets.all(0),
+              child: Text(name,
+                  style: const TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
+            Container(
+              margin: const EdgeInsets.all(0),
+              child: Text("Mmmm deliciosa",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ),
+            Container(
+              margin: const EdgeInsets.all(0),
+              child: Text("Un monton de kalorias",
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w300,
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

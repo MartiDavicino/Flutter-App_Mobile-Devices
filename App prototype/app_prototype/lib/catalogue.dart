@@ -19,10 +19,10 @@ class Catalogue extends StatelessWidget {
             BurgerCard("Burger #2", 2),
             BurgerCard("Burger #3", 3),
             BurgerCard("Burger #4", 4),
-            BurgerCard("Burger #1", 1),
-            BurgerCard("Burger #2", 2),
-            BurgerCard("Burger #3", 3),
-            BurgerCard("Burger #4", 4),
+            BurgerCard("Burger #5", 1),
+            BurgerCard("Burger #6", 2),
+            BurgerCard("Burger #7", 3),
+            BurgerCard("Burger #8", 4),
           ],
         ),
       ),
@@ -43,7 +43,12 @@ class BurgerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(3),
-      color: Colors.blueAccent,
+      decoration: const BoxDecoration(
+        color: Colors.blueAccent,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
       child: InkWell(
         onTap: () {
           print("Burger card tapped");
@@ -57,12 +62,20 @@ class BurgerCard extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.all(30),
+              decoration: const BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
               height: 180,
               width: 180,
-              color: Colors.grey,
-              child: Image(
-                image: AssetImage("assets/" + img.toString() + "png"),
-              ),
+
+              //child: Image(
+              //image: NetworkImage(
+              //"https://github.com/MartiDavicino/Flutter-App_Mobile-Devices/blob/main/App%20prototype/app_prototype/assets/1.png"),
+              //image: AssetImage("assets/" + img.toString() + "png"),
+              //),
             ),
             Text(
               name,
