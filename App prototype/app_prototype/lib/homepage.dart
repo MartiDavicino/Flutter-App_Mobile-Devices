@@ -2,7 +2,10 @@ import 'package:app_prototype/catalogue.dart';
 import 'package:app_prototype/aboutus.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
+  dynamic doc;
+  HomePage(this.doc, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,13 +16,11 @@ class HomePage extends StatelessWidget {
         alignment: Alignment.center,
         child: Column(
           children: [
-            Header("Burger Collection"),
-            HomePageButton(
-                "About Us", MaterialPageRoute(builder: (context) => AboutUs())),
+            const Header("Burger Collection"),
+            HomePageButton("About Us",
+                MaterialPageRoute(builder: (context) => AboutUs(doc))),
             HomePageButton("Catalogue",
-                MaterialPageRoute(builder: (context) => Catalogue())),
-            HomePageButton("Telmo link",
-                MaterialPageRoute(builder: (context) => AboutUs())),
+                MaterialPageRoute(builder: (context) => Catalogue(doc))),
           ],
         ),
       ),

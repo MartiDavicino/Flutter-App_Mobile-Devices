@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutUs extends StatelessWidget {
-  const AboutUs({Key? key}) : super(key: key);
+  dynamic doc;
+  AboutUs(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,8 @@ class AboutUs extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            child: const Text("Somos los chabales que tocan la flauta"),
+            alignment: Alignment.center,
+            child: Text(doc["AboutUs"]),
           )
         ],
       ),

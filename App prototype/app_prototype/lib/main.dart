@@ -24,7 +24,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-
+  final db =
+      FirebaseFirestore.instance.doc("/Data/ZqaA5SR06h9mGHgl7sDE").snapshots();
+  dynamic doc;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -46,22 +48,24 @@ class MyApp extends StatelessWidget {
                         child: Column(children: [
               const Header("Borgir app"),
               StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .doc("/Test/AmBB8HBTpbgZxOEOVbEW")
-                      .snapshots(),
+                  stream: db,
                   builder: (BuildContext context,
                       AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
                           snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    final doc = snapshot.data!.data();
+                    doc = snapshot.data!.data();
                     if (doc != null) {
-                      return Center(child: Text(doc["Text"]));
+                      return Center(child: Text(doc["Name"]));
                     } else {
                       return const Center(child: Text("doc is null!"));
                     }
                   }),
+              HomePageButton(
+                "Home Page",
+                MaterialPageRoute(builder: (context) => HomePage(doc)),
+              )
             ]))));
           }
           // Loading Connection

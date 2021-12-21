@@ -4,27 +4,31 @@ import 'package:flutter/material.dart';
 List<Burger> burgerList = [];
 
 class Catalogue extends StatelessWidget {
-  const Catalogue({Key? key}) : super(key: key);
+  dynamic doc;
+  Catalogue(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AddBurgers();
+    AddBurgers(doc);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Catalogue", style: TextStyle(fontSize: 30)),
-      ),
-      body: GridView.count(
-        childAspectRatio: 2 / 2.2,
-        crossAxisCount: 2,
-        children: [
-          for (int i = 0; i < burgerList.length; i++) BurgerCard(burgerList[i])
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: const Text("Catalogue", style: TextStyle(fontSize: 30)),
+        ),
+        body: Scrollbar(
+          child: GridView.count(
+            childAspectRatio: 2 / 2.2,
+            crossAxisCount: 2,
+            children: [
+              for (int i = 0; i < burgerList.length; i++)
+                BurgerCard(burgerList[i])
+            ],
+          ),
+        ));
   }
 }
 
-void AddBurgers() {
+// ignore: non_constant_identifier_names
+void AddBurgers(dynamic doc) {
   burgerList.add(Burger("Burger #1", 1, 1));
   burgerList.add(Burger("Burger #2", 1, 1));
   burgerList.add(Burger("Burger #3", 1, 1));
