@@ -3,28 +3,35 @@ import 'dart:ui';
 import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
 
+List<Burger> burgerList = [];
+
 class Catalogue extends StatelessWidget {
+  const Catalogue({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    //
+    Burger a = Burger("jfaj", 1, 1);
+    burgerList.add(a);
+    //
     return Scaffold(
       appBar: AppBar(
         title: const Text("Catalogue", style: TextStyle(fontSize: 30)),
       ),
-      body: Container(
-        child: GridView.count(
-          childAspectRatio: 2 / 2.2,
-          crossAxisCount: 2,
-          children: const [
-            BurgerCard("Burger #1", 1),
-            BurgerCard("Burger #2", 2),
-            BurgerCard("Burger #3", 3),
-            BurgerCard("Burger #4", 4),
-            BurgerCard("Burger #5", 1),
-            BurgerCard("Burger #6", 2),
-            BurgerCard("Burger #7", 3),
-            BurgerCard("Burger #8", 4),
-          ],
-        ),
+      body: GridView.count(
+        childAspectRatio: 2 / 2.2,
+        crossAxisCount: 2,
+        children: [
+          //burgerList.add(Burger("hola,",1,1)),
+          BurgerCard("Burger #1", 1),
+          BurgerCard("Burger #2", 2),
+          BurgerCard("Burger #3", 3),
+          BurgerCard("Burger #4", 4),
+          BurgerCard("Burger #5", 1),
+          BurgerCard("Burger #6", 2),
+          BurgerCard("Burger #7", 3),
+          BurgerCard("Burger #8", 4),
+        ],
       ),
     );
   }
