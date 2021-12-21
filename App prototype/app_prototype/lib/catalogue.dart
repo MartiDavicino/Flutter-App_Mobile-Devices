@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
 
