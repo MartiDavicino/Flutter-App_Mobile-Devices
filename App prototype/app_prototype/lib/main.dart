@@ -5,50 +5,74 @@ import 'package:app_prototype/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_web/firebase_core_web.dart';
 
-Future<void> main() async {
+import 'config.dart';
+
+final configurations = Configurations();
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    // Replace with actual values
+    options: FirebaseOptions(
+      apiKey: configurations.apiKey,
+      appId: configurations.appId,
+      messagingSenderId: configurations.messagingSenderId,
+      projectId: configurations.projectId,
+    ),
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    final db = FirebaseFirestore.instance;
-    return MaterialApp(
-      title: "Burger App",
-      home: Scaffold(
-        body: Container(
-            child: Column(children: [
-          const Header("Borgir app"),
-          StreamBuilder(
-            stream: db.doc("/Test/AmBB8HBTpbgZxOEOVbEW").snapshots(),
-            builder: (BuildContext context,
-                AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
-                    snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              final doc = snapshot.data!.data();
-              if (doc != null) {
-                return Center(child: Text(doc["text"]));
-              } else {
-                return const Center(child: Text("doc is null!"));
-              }
-            },
-          ),
-          //HomePageButton(
-          //"HomePage", MaterialPageRoute(builder: (context) => HomePage())),
-          //FutureBuilder(future: db.collection('Test').getDocuments(),
-          //builder: (context, AsyncSnapshot<QuierySnapshot> snapshot) {
-// Construir un widget en función de los datos
-//},
-          //)
-        ])),
-        appBar: AppBar(
-          title: const Text("barra de prueba"),
-        ),
-      ),
-    );
+    return FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return MaterialApp(
+              home: Scaffold(
+                  body: Center(
+                      child: Text(snapshot.error.toString(),
+                          textDirection: TextDirection.ltr))),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            // FIREBASE IS BEING INITIALIZED
+            return MaterialApp(
+                home: Scaffold(
+                    body: Container(
+                        child: Column(children: [
+              const Header("Borgir app"),
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .doc("/Test/AmBB8HBTpbgZxOEOVbEW")
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    final doc = snapshot.data!.data();
+                    if (doc != null) {
+                      return Center(child: Text(doc["Text"]));
+                    } else {
+                      return const Center(child: Text("doc is null!"));
+                    }
+                  }),
+            ]))));
+          }
+          // Loading Connection
+          return MaterialApp(
+              home: Scaffold(
+            body: Center(
+              child: Container(
+                child: Text("Loading..."),
+              ),
+            ),
+          ));
+        });
   }
 }
