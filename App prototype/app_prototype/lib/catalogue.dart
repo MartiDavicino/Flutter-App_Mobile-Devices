@@ -4,7 +4,6 @@ import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
 
 class Catalogue extends StatelessWidget {
-  List<Burger> burgers = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,14 +15,14 @@ class Catalogue extends StatelessWidget {
           childAspectRatio: 2 / 2.2,
           crossAxisCount: 2,
           children: const [
-            BurgerCard(),
-            BurgerCard(),
-            BurgerCard(),
-            BurgerCard(),
-            BurgerCard(),
-            BurgerCard(),
-            BurgerCard(),
-            BurgerCard(),
+            BurgerCard("Burger #1", 1),
+            BurgerCard("Burger #2", 2),
+            BurgerCard("Burger #3", 3),
+            BurgerCard("Burger #4", 4),
+            BurgerCard("Burger #5", 1),
+            BurgerCard("Burger #6", 2),
+            BurgerCard("Burger #7", 3),
+            BurgerCard("Burger #8", 4),
           ],
         ),
       ),
@@ -32,9 +31,11 @@ class Catalogue extends StatelessWidget {
 }
 
 class BurgerCard extends StatelessWidget {
-  final Burger burger;
+  final String name;
+  final int img;
   const BurgerCard(
-    this.burger, {
+    this.name,
+    this.img, {
     Key? key,
   }) : super(key: key);
 
@@ -53,7 +54,7 @@ class BurgerCard extends StatelessWidget {
           print("Burger card tapped");
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => BurgerDetails(burger.name),
+              builder: (context) => BurgerDetails(name),
             ),
           );
         },
@@ -77,7 +78,7 @@ class BurgerCard extends StatelessWidget {
               //),
             ),
             Text(
-              burger.name,
+              name,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
