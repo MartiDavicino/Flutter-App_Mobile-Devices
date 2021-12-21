@@ -1,8 +1,11 @@
+import 'dart:math';
+import 'package:app_prototype/catalogue.dart';
 import 'package:flutter/material.dart';
 
 class BurgerDetails extends StatelessWidget {
-  final String name;
-  const BurgerDetails(this.name, {Key? key}) : super(key: key);
+  final Burger burger;
+
+  const BurgerDetails(this.burger, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class BurgerDetails extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.all(0),
-                  child: Text(name,
+                  child: Text(burger.name,
                       style: const TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.w600,
@@ -113,6 +116,11 @@ class BarButton extends StatelessWidget {
 
 void NextBurger() {
   print("Next burger");
+  //Navigator.of(context).push(
+  //  MaterialPageRoute(
+  //    builder: (context) => BurgerDetails(burgerList[3]),
+  //  ),
+  //);
 }
 
 void PreviousBurger() {
@@ -121,4 +129,6 @@ void PreviousBurger() {
 
 void RandomBurger() {
   print("Random burger");
+  Random random = new Random();
+  int randomNumber = random.nextInt(burgerList.length);
 }

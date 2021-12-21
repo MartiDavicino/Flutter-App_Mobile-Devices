@@ -10,10 +10,7 @@ class Catalogue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //
-    Burger a = Burger("jfaj", 1, 1);
-    burgerList.add(a);
-    //
+    AddBurgers();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Catalogue", style: TextStyle(fontSize: 30)),
@@ -22,27 +19,28 @@ class Catalogue extends StatelessWidget {
         childAspectRatio: 2 / 2.2,
         crossAxisCount: 2,
         children: [
-          //burgerList.add(Burger("hola,",1,1)),
-          BurgerCard("Burger #1", 1),
-          BurgerCard("Burger #2", 2),
-          BurgerCard("Burger #3", 3),
-          BurgerCard("Burger #4", 4),
-          BurgerCard("Burger #5", 1),
-          BurgerCard("Burger #6", 2),
-          BurgerCard("Burger #7", 3),
-          BurgerCard("Burger #8", 4),
+          for (int i = 0; i < burgerList.length; i++) BurgerCard(burgerList[i])
         ],
       ),
     );
   }
 }
 
+void AddBurgers() {
+  burgerList.add(Burger("Burger #1", 1, 1));
+  burgerList.add(Burger("Burger #2", 1, 1));
+  burgerList.add(Burger("Burger #3", 1, 1));
+  burgerList.add(Burger("Burger #4", 1, 1));
+  burgerList.add(Burger("Burger #5", 1, 1));
+  burgerList.add(Burger("Burger #6", 1, 1));
+  burgerList.add(Burger("Burger #7", 1, 1));
+  burgerList.add(Burger("Burger #8", 1, 1));
+}
+
 class BurgerCard extends StatelessWidget {
-  final String name;
-  final int img;
+  final Burger burger;
   const BurgerCard(
-    this.name,
-    this.img, {
+    this.burger, {
     Key? key,
   }) : super(key: key);
 
@@ -61,7 +59,7 @@ class BurgerCard extends StatelessWidget {
           print("Burger card tapped");
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => BurgerDetails(name),
+              builder: (context) => BurgerDetails(burger),
             ),
           );
         },
@@ -85,7 +83,7 @@ class BurgerCard extends StatelessWidget {
               //),
             ),
             Text(
-              name,
+              burger.name,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
