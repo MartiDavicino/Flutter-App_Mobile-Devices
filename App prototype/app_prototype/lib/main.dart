@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                 home: Scaffold(
                     body: Container(
                         child: Column(children: [
-              const Header("Borgir app"),
+              const Header("Burger collection"),
               StreamBuilder(
                   stream: db,
                   builder: (BuildContext context,

@@ -13,8 +13,11 @@ class AboutUs extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            alignment: Alignment.center,
-            child: Text(doc["AboutUs"]),
+            margin: const EdgeInsets.all(20),
+            child: Text(
+              doc["AboutUs"],
+              style: const TextStyle(fontSize: 25),
+            ),
           )
         ],
       ),
