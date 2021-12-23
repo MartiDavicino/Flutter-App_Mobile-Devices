@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return MaterialApp(
+              theme: ThemeData(primaryColor: configurations.mainColor),
               home: Scaffold(
                   body: Center(
                       child: Text(snapshot.error.toString(),

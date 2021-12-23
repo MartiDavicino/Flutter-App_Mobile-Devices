@@ -14,9 +14,10 @@ class BurgerDetails extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            width: double.infinity,
             margin: EdgeInsets.all(40),
-            decoration: const BoxDecoration(
-              color: Colors.grey,
+            decoration: BoxDecoration(
+              color: Colors.grey.withAlpha(80),
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
               ),
@@ -27,13 +28,13 @@ class BurgerDetails extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(30, 50, 30, 10),
-                  decoration: const BoxDecoration(
-                    color: Colors.blue,
+                  decoration: BoxDecoration(
+                    color: configurations.mainColor,
                     borderRadius: BorderRadius.all(
                       Radius.circular(50),
                     ),
                   ),
-                  height: 480,
+                  height: 520,
                   width: 500,
                 ),
                 Container(
@@ -45,16 +46,16 @@ class BurgerDetails extends StatelessWidget {
                       )),
                 ),
                 Container(
-                  margin: const EdgeInsets.all(0),
-                  child: const Text("Mmmm deliciosa",
+                  margin: const EdgeInsets.all(10),
+                  child: const Text("Burger description",
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w300,
                       )),
                 ),
                 Container(
-                  margin: const EdgeInsets.all(0),
-                  child: const Text("Un monton de kalorias",
+                  margin: const EdgeInsets.all(10),
+                  child: const Text("More Burger description",
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w300,
@@ -66,9 +67,9 @@ class BurgerDetails extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 100,
-            margin: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-            decoration: const BoxDecoration(
-              color: Colors.green,
+            margin: const EdgeInsets.fromLTRB(40, 110, 40, 10),
+            decoration: BoxDecoration(
+              color: configurations.mainColor,
               borderRadius: BorderRadius.all(
                 Radius.circular(30),
               ),

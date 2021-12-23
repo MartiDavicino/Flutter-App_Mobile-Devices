@@ -1,6 +1,8 @@
 import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
+import 'config.dart';
 
+final configurations = Configurations();
 List<Burger> burgerList = [];
 
 class Catalogue extends StatelessWidget {
@@ -50,8 +52,8 @@ class BurgerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(3),
-      decoration: const BoxDecoration(
-        color: Colors.blueAccent,
+      decoration: BoxDecoration(
+        color: Colors.amber[600]!.withAlpha(80),
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
@@ -69,8 +71,8 @@ class BurgerCard extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.all(30),
-              decoration: const BoxDecoration(
-                color: Colors.grey,
+              decoration: BoxDecoration(
+                color: Colors.grey.withAlpha(120),
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
