@@ -89,6 +89,7 @@ class ProfileImage extends StatelessWidget {
               Radius.circular(20),
             ),
           ),
+          child: AnimatedImage(),
         ),
       ),
     );
@@ -114,6 +115,67 @@ class ArrowButton extends StatelessWidget {
           size: 50,
         ),
       ),
+    );
+  }
+}
+
+class AnimatedImage extends StatefulWidget {
+  const AnimatedImage({Key? key}) : super(key: key);
+
+  @override
+  _AnimatedImageState createState() => _AnimatedImageState();
+}
+
+class _AnimatedImageState extends State<AnimatedImage> {
+  late double width, height;
+  //late Color color;
+  //late double radius;
+
+  void setMaxValues() {
+    width = 400;
+    height = 400;
+  }
+
+  setMinValues() {
+    width = 380;
+    height = 40;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setMinValues();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: 400,
+          height: 400,
+          child: Center(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.ease,
+              width: width,
+              height: height,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+            ),
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() => setMaxValues());
+          },
+          child: const Text("New rectangle"),
+        ),
+      ],
     );
   }
 }
