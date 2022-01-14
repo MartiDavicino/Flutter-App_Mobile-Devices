@@ -105,11 +105,14 @@ class ArrowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-      child: Icon(
-        icon,
-        color: Colors.grey,
-        size: 50,
+      //margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+      child: InkWell(
+        onTap: () {},
+        child: Icon(
+          icon,
+          color: Colors.grey,
+          size: 50,
+        ),
       ),
     );
   }
