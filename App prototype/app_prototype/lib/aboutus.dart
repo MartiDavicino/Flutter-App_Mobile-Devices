@@ -1,119 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swipable/flutter_swipable.dart';
 
-class AboutUs extends StatelessWidget {
+// Link to DB
+final List data = [
+  {
+    'color': Colors.red,
+    'name': "Marti Davicino",
+  },
+  {
+    'color': Colors.green,
+    'name': "Aitor Álvarez",
+  },
+  {
+    'color': Colors.blue,
+    'name': "Telmo Nauta",
+  }
+];
+
+class AboutUs extends StatefulWidget {
   dynamic doc;
   AboutUs(this.doc, {Key? key}) : super(key: key);
-
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("About Us"),
-      ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            child: Text(
-              doc["AboutUs"],
-              style: const TextStyle(fontSize: 25),
-            ),
-          ),
-          Row(
-            children: [
-              ArrowButton(Icons.arrow_left),
-              ProfileImage(),
-              ArrowButton(Icons.arrow_right)
-            ],
-          ),
-          Description(),
-        ],
-      ),
-    );
-  }
+  _AboutUsState createState() => _AboutUsState();
 }
 
-class Description extends StatelessWidget {
-  const Description({
-    Key? key,
-  }) : super(key: key);
+class _AboutUsState extends State<AboutUs> {
+  // Dynamically load cards from database
+  List<Card> cards = [
+    Card(data[0]['color'], data[0]['name']),
+    Card(data[1]['color'], data[1]['name']),
+    Card(data[2]['color'], data[2]['name']),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey.withAlpha(80),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
-          ),
-        ),
-        child: Text(
-          "This is the description of...",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-    );
-  }
-}
-
-class ProfileImage extends StatelessWidget {
-  const ProfileImage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        alignment: Alignment.center,
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 50),
-        width: 400,
-        height: 500,
-        decoration: BoxDecoration(
-          color: Colors.grey.withAlpha(80),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
-          ),
-        ),
-        child: Container(
-          margin: const EdgeInsets.all(25),
-          width: 400,
-          height: 500,
-          decoration: BoxDecoration(
-            color: Colors.black.withAlpha(80),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ArrowButton extends StatelessWidget {
-  final icon;
-  const ArrowButton(
-    this.icon, {
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+    // Stack of cards that can be swiped. Set width, height, etc here.
     return Container(
-      //margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-      child: InkWell(
-        onTap: () {},
-        child: Icon(
-          icon,
-          color: Colors.grey,
-          size: 50,
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.7,
+      // Important to keep as a stack to have overlay of cards.
+      child: Stack(
+        children: cards,
+      ),
+    );
+  }
+}
+
+class Card extends StatelessWidget {
+  // Made to distinguish cards
+  // Add your own applicable data here
+  final Color color;
+  final String name;
+  Card(this.color, this.name);
+
+  @override
+  Widget build(BuildContext context) {
+    return Swipable(
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.0),
+          color: color,
+        ),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(20),
+              width: double.infinity,
+              height: 100,
+              color: Colors.grey,
+            ),
+            Container(
+              child: Text(
+                name,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
+      // onSwipeRight, left, up, down, cancel, etc...
     );
   }
 }
