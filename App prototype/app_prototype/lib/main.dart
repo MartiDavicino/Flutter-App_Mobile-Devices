@@ -36,48 +36,112 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               theme: ThemeData(primaryColor: configurations.mainColor),
               home: Scaffold(
-                  body: Center(
-                      child: Text(snapshot.error.toString(),
-                          textDirection: TextDirection.ltr))),
+                body: Center(
+                  child: Text(snapshot.error.toString(),
+                      textDirection: TextDirection.ltr),
+                ),
+              ),
             );
           }
           if (snapshot.connectionState == ConnectionState.done) {
             // FIREBASE IS BEING INITIALIZED
             return MaterialApp(
-                home: Scaffold(
-                    body: Container(
-                        child: Column(children: [
-              const Header("Burger collection"),
-              StreamBuilder(
-                  stream: db,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
-                          snapshot) {
-                    if (!snapshot.hasData) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    doc = snapshot.data!.data();
-                    if (doc != null) {
-                      return Center(child: Text(doc["Name"]));
-                    } else {
-                      return const Center(child: Text("doc is null!"));
-                    }
-                  }),
-              HomePageButton(
-                "Home Page",
-                MaterialPageRoute(builder: (context) => HomePage(doc)),
-              )
-            ]))));
+              home: Scaffold(
+                body: Container(
+                  child: Column(
+                    children: [
+                      const Header("Burger collection"),
+                      StreamBuilder(
+                          stream: db,
+                          builder: (BuildContext context,
+                              AsyncSnapshot<
+                                      DocumentSnapshot<Map<String, dynamic>>>
+                                  snapshot) {
+                            if (!snapshot.hasData) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+                            doc = snapshot.data!.data();
+                            if (doc != null) {
+                              return Center(child: Text(doc["Name"]));
+                            } else {
+                              return const Center(child: Text("doc is null!"));
+                            }
+                          }),
+                      HomePageButton(
+                        "Home Page",
+                        MaterialPageRoute(builder: (context) => HomePage(doc)),
+                      ),
+                      LogoAnimation(),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
           // Loading Connection
           return MaterialApp(
               home: Scaffold(
             body: Center(
               child: Container(
-                child: Text("Loading..."),
+                child: const Text("Loading..."),
               ),
             ),
           ));
         });
+  }
+}
+
+//Logo Animation
+class LogoAnimation extends StatefulWidget {
+  const LogoAnimation({Key? key}) : super(key: key);
+
+  @override
+  _AnimatedRotatingGalaxyDemoState createState() =>
+      _AnimatedRotatingGalaxyDemoState();
+}
+
+class _AnimatedRotatingGalaxyDemoState extends State<LogoAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> _rotation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    );
+    controller.repeat();
+    _rotation = controller;
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          RotationTransition(
+            turns: _rotation,
+            child: Container(
+              width: 100,
+              height: 100,
+              padding: const EdgeInsets.all(10),
+              color: Colors.blue,
+              child: const Center(child: Text("Logo")),
+            ),
+          ),
+          const SizedBox(height: 50),
+        ],
+      ),
+    );
   }
 }
