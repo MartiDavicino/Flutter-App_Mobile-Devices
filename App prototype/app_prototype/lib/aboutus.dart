@@ -1,88 +1,119 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swipable/flutter_swipable.dart';
 
-// Link to DB
-final List data = [
-  {
-    'color': Colors.red,
-    'name': "Marti Davicino",
-  },
-  {
-    'color': Colors.green,
-    'name': "Aitor Álvarez",
-  },
-  {
-    'color': Colors.blue,
-    'name': "Telmo Nauta",
-  }
-];
-
-class AboutUs extends StatefulWidget {
+class AboutUs extends StatelessWidget {
   dynamic doc;
   AboutUs(this.doc, {Key? key}) : super(key: key);
-  @override
-  _AboutUsState createState() => _AboutUsState();
-}
-
-class _AboutUsState extends State<AboutUs> {
-  // Dynamically load cards from database
-  List<Card> cards = [
-    Card(data[0]['color'], data[0]['name']),
-    Card(data[1]['color'], data[1]['name']),
-    Card(data[2]['color'], data[2]['name']),
-  ];
 
   @override
   Widget build(BuildContext context) {
-    // Stack of cards that can be swiped. Set width, height, etc here.
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.7,
-      // Important to keep as a stack to have overlay of cards.
-      child: Stack(
-        children: cards,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("About Us"),
+      ),
+      body: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: Text(
+              doc["AboutUs"],
+              style: const TextStyle(fontSize: 25),
+            ),
+          ),
+          Row(
+            children: [
+              ArrowButton(Icons.arrow_left),
+              ProfileImage(),
+              ArrowButton(Icons.arrow_right)
+            ],
+          ),
+          Description(),
+        ],
       ),
     );
   }
 }
 
-class Card extends StatelessWidget {
-  // Made to distinguish cards
-  // Add your own applicable data here
-  final Color color;
-  final String name;
-  Card(this.color, this.name);
+class Description extends StatelessWidget {
+  const Description({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Swipable(
+    return Expanded(
       child: Container(
-        width: double.infinity,
+        margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+        width: 100,
+        height: 100,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          color: color,
+          color: Colors.grey.withAlpha(80),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
         ),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              width: double.infinity,
-              height: 100,
-              color: Colors.grey,
-            ),
-            Container(
-              child: Text(
-                name,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ],
+        child: Text(
+          "This is the description of...",
+          style: TextStyle(fontSize: 20),
         ),
       ),
-      // onSwipeRight, left, up, down, cancel, etc...
+    );
+  }
+}
+
+class ProfileImage extends StatelessWidget {
+  const ProfileImage({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 50),
+        width: 400,
+        height: 500,
+        decoration: BoxDecoration(
+          color: Colors.grey.withAlpha(80),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Container(
+          margin: const EdgeInsets.all(25),
+          width: 400,
+          height: 500,
+          decoration: BoxDecoration(
+            color: Colors.black.withAlpha(80),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ArrowButton extends StatelessWidget {
+  final icon;
+  const ArrowButton(
+    this.icon, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+      child: InkWell(
+        onTap: () {},
+        child: Icon(
+          icon,
+          color: Colors.grey,
+          size: 50,
+        ),
+      ),
     );
   }
 }
