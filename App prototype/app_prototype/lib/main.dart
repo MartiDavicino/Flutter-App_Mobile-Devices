@@ -1,9 +1,7 @@
-import 'package:app_prototype/catalogue.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:app_prototype/homepage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_core_web/firebase_core_web.dart';
+import 'package:flutter/material.dart';
 
 import 'config.dart';
 
@@ -24,71 +22,68 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  final db =
-      FirebaseFirestore.instance.doc("/Data/ZqaA5SR06h9mGHgl7sDE").snapshots();
+  final db = FirebaseFirestore.instance.doc("/Data/ZqaA5SR06h9mGHgl7sDE").snapshots();
   dynamic doc;
+
+  MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _initialization,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return MaterialApp(
-              theme: ThemeData(primaryColor: configurations.mainColor),
-              home: Scaffold(
-                body: Center(
-                  child: Text(snapshot.error.toString(),
-                      textDirection: TextDirection.ltr),
-                ),
-              ),
-            );
-          }
-          if (snapshot.connectionState == ConnectionState.done) {
-            // FIREBASE IS BEING INITIALIZED
-            return MaterialApp(
-              home: Scaffold(
-                body: Container(
-                  child: Column(
-                    children: [
-                      const Header("Burger collection"),
-                      StreamBuilder(
-                          stream: db,
-                          builder: (BuildContext context,
-                              AsyncSnapshot<
-                                      DocumentSnapshot<Map<String, dynamic>>>
-                                  snapshot) {
-                            if (!snapshot.hasData) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                            doc = snapshot.data!.data();
-                            if (doc != null) {
-                              return Center(child: Text(doc["Name"]));
-                            } else {
-                              return const Center(child: Text("doc is null!"));
-                            }
-                          }),
-                      HomePageButton(
-                        "Home Page",
-                        MaterialPageRoute(builder: (context) => HomePage(doc)),
-                      ),
-                      LogoAnimation(),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
-          // Loading Connection
+      future: _initialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
           return MaterialApp(
-              home: Scaffold(
-            body: Center(
-              child: Container(
-                child: const Text("Loading..."),
+            theme: ThemeData(primaryColor: configurations.mainColor),
+            home: Scaffold(
+              body: Center(
+                child: Text(snapshot.error.toString(), textDirection: TextDirection.ltr),
               ),
             ),
-          ));
-        });
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          // FIREBASE IS BEING INITIALIZED
+          return MaterialApp(
+            home: Scaffold(
+              body: Column(
+                children: [
+                  const Header("Burger collection"),
+                  StreamBuilder(
+                      stream: db,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
+                              snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        doc = snapshot.data!.data();
+                        if (doc != null) {
+                          return Center(child: Text(doc["Name"]));
+                        } else {
+                          return const Center(child: Text("doc is null!"));
+                        }
+                      }),
+                  HomePageButton(
+                    "Home Page",
+                    MaterialPageRoute(builder: (context) => HomePage(doc)),
+                  ),
+                  const LogoAnimation(),
+                ],
+              ),
+            ),
+          );
+        }
+        // Loading Connection
+        return const MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: Text("Loading..."),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -97,8 +92,7 @@ class LogoAnimation extends StatefulWidget {
   const LogoAnimation({Key? key}) : super(key: key);
 
   @override
-  _AnimatedRotatingGalaxyDemoState createState() =>
-      _AnimatedRotatingGalaxyDemoState();
+  _AnimatedRotatingGalaxyDemoState createState() => _AnimatedRotatingGalaxyDemoState();
 }
 
 class _AnimatedRotatingGalaxyDemoState extends State<LogoAnimation>

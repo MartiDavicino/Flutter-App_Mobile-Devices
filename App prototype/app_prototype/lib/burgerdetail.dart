@@ -15,10 +15,10 @@ class BurgerDetails extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            margin: EdgeInsets.all(40),
+            margin: const EdgeInsets.all(40),
             decoration: BoxDecoration(
               color: Colors.grey.withAlpha(80),
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
             ),
@@ -30,7 +30,7 @@ class BurgerDetails extends StatelessWidget {
                   margin: const EdgeInsets.fromLTRB(30, 50, 30, 10),
                   decoration: BoxDecoration(
                     color: configurations.mainColor,
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(50),
                     ),
                   ),
@@ -48,18 +48,20 @@ class BurgerDetails extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.all(10),
                   child: const Text("Burger description",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w300,
                       )),
                 ),
                 Container(
                   margin: const EdgeInsets.all(10),
-                  child: const Text("More Burger description",
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w300,
-                      )),
+                  child: const Text(
+                    "More Burger description",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -70,15 +72,15 @@ class BurgerDetails extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(40, 110, 40, 10),
             decoration: BoxDecoration(
               color: configurations.mainColor,
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(30),
               ),
             ),
             child: Row(
-              children: [
-                BarButton(Icons.arrow_left, PreviousBurger),
-                BarButton(Icons.shuffle, RandomBurger),
-                BarButton(Icons.arrow_right, NextBurger),
+              children: const [
+                BarButton(Icons.arrow_left, previousBurger),
+                BarButton(Icons.shuffle, randomBurger),
+                BarButton(Icons.arrow_right, nextBurger),
               ],
             ),
           ),
@@ -89,8 +91,8 @@ class BurgerDetails extends StatelessWidget {
 }
 
 class BarButton extends StatelessWidget {
-  final icon;
-  final method;
+  final IconData icon;
+  final void Function() method;
   const BarButton(
     this.icon,
     this.method, {
@@ -105,18 +107,14 @@ class BarButton extends StatelessWidget {
           method();
         },
         hoverColor: Colors.red,
-        child: Icon(
-          this.icon,
-          color: Colors.black,
-          size: 45,
-        ),
+        child: Icon(icon, color: Colors.black, size: 45),
       ),
     );
   }
 }
 
-void NextBurger() {
-  print("Next burger");
+void nextBurger() {
+  debugPrint("Next burger");
   //Navigator.of(context).push(
   //  MaterialPageRoute(
   //    builder: (context) => BurgerDetails(burgerList[3]),
@@ -124,12 +122,12 @@ void NextBurger() {
   //);
 }
 
-void PreviousBurger() {
-  print("Previous burger");
+void previousBurger() {
+  debugPrint("Previous burger");
 }
 
-void RandomBurger() {
-  print("Random burger");
-  Random random = new Random();
+void randomBurger() {
+  debugPrint("Random burger");
+  Random random = Random();
   int randomNumber = random.nextInt(burgerList.length);
 }

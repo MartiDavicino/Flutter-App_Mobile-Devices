@@ -20,10 +20,10 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             const Header("Burger Collection"),
-            HomePageButton("About Us",
-                MaterialPageRoute(builder: (context) => AboutUs(doc))),
-            HomePageButton("Catalogue",
-                MaterialPageRoute(builder: (context) => Catalogue(doc))),
+            HomePageButton(
+                "About Us", MaterialPageRoute(builder: (context) => AboutUs(doc))),
+            HomePageButton(
+                "Catalogue", MaterialPageRoute(builder: (context) => Catalogue(doc))),
           ],
         ),
       ),
@@ -45,9 +45,11 @@ class HomePageButton extends StatelessWidget {
     return Container(
       height: 60,
       width: 200,
-      margin: EdgeInsets.fromLTRB(0, 60, 0, 60),
-      child: RaisedButton(
-        color: configurations.mainColor,
+      margin: const EdgeInsets.fromLTRB(0, 60, 0, 60),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: configurations.mainColor,
+        ),
         onPressed: () {
           Navigator.of(context).push(route);
         },

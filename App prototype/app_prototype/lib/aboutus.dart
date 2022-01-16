@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutUs extends StatelessWidget {
-  dynamic doc;
-  AboutUs(this.doc, {Key? key}) : super(key: key);
+  final dynamic doc;
+  const AboutUs(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class AboutUs extends StatelessWidget {
             ),
           ),
           Row(
-            children: [
+            children: const [
               ArrowButton(Icons.arrow_left),
               ProfileImage(),
               ArrowButton(Icons.arrow_right)
             ],
           ),
-          Description(),
+          const Description(),
         ],
       ),
     );
@@ -51,7 +51,7 @@ class Description extends StatelessWidget {
             Radius.circular(20),
           ),
         ),
-        child: Text(
+        child: const Text(
           "This is the description of...",
           style: TextStyle(fontSize: 20),
         ),
@@ -89,7 +89,7 @@ class ProfileImage extends StatelessWidget {
               Radius.circular(20),
             ),
           ),
-          child: AnimatedImage(),
+          child: const AnimatedImage(),
         ),
       ),
     );
@@ -97,7 +97,7 @@ class ProfileImage extends StatelessWidget {
 }
 
 class ArrowButton extends StatelessWidget {
-  final icon;
+  final IconData icon;
   const ArrowButton(
     this.icon, {
     Key? key,
@@ -105,15 +105,12 @@ class ArrowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-      child: InkWell(
-        onTap: () {},
-        child: Icon(
-          icon,
-          color: Colors.grey,
-          size: 50,
-        ),
+    return InkWell(
+      onTap: () {},
+      child: Icon(
+        icon,
+        color: Colors.grey,
+        size: 50,
       ),
     );
   }
@@ -160,7 +157,7 @@ class _AnimatedImageState extends State<AnimatedImage> {
               curve: Curves.ease,
               width: width,
               height: height,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.red,
                 borderRadius: BorderRadius.all(
                   Radius.circular(10),

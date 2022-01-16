@@ -1,13 +1,14 @@
 import 'package:app_prototype/burgerdetail.dart';
 import 'package:flutter/material.dart';
+
 import 'config.dart';
 
 final configurations = Configurations();
 List<Burger> burgerList = [];
 
 class Catalogue extends StatelessWidget {
-  dynamic doc;
-  Catalogue(this.doc, {Key? key}) : super(key: key);
+  final dynamic doc;
+  const Catalogue(this.doc, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,7 @@ class Catalogue extends StatelessWidget {
             childAspectRatio: 2 / 2.2,
             crossAxisCount: 2,
             children: [
-              for (int i = 0; i < burgerList.length; i++)
-                BurgerCard(burgerList[i])
+              for (int i = 0; i < burgerList.length; i++) BurgerCard(burgerList[i])
             ],
           ),
         ));
@@ -54,13 +54,13 @@ class BurgerCard extends StatelessWidget {
       margin: const EdgeInsets.all(3),
       decoration: BoxDecoration(
         color: Colors.amber[600]!.withAlpha(80),
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(10),
         ),
       ),
       child: InkWell(
         onTap: () {
-          print("Burger card tapped");
+          debugPrint("Burger card tapped");
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => BurgerDetails(burger),
@@ -70,10 +70,10 @@ class BurgerCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(30),
+              margin: const EdgeInsets.all(30),
               decoration: BoxDecoration(
                 color: Colors.grey.withAlpha(120),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
