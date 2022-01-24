@@ -1,5 +1,6 @@
 import 'package:app_prototype/catalogue.dart';
 import 'package:app_prototype/aboutus.dart';
+import 'package:app_prototype/newaboutus.dart';
 import 'package:flutter/material.dart';
 import 'config.dart';
 
@@ -20,10 +21,12 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             const Header("Burger Collection"),
-            HomePageButton(
-                "About Us", MaterialPageRoute(builder: (context) => AboutUs(doc))),
-            HomePageButton(
-                "Catalogue", MaterialPageRoute(builder: (context) => Catalogue(doc))),
+            HomePageButton("About Us",
+                MaterialPageRoute(builder: (context) => AboutUs(doc))),
+            HomePageButton("New About Us",
+                MaterialPageRoute(builder: (context) => NewAboutUs())),
+            HomePageButton("Catalogue",
+                MaterialPageRoute(builder: (context) => Catalogue(doc))),
           ],
         ),
       ),
