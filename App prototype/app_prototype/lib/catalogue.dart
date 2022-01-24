@@ -22,7 +22,8 @@ class Catalogue extends StatelessWidget {
             childAspectRatio: 2 / 2.2,
             crossAxisCount: 2,
             children: [
-              for (int i = 0; i < burgerList.length; i++) BurgerCard(burgerList[i])
+              for (int i = 0; i < burgerList.length; i++)
+                BurgerCard(burgerList[i])
             ],
           ),
         ));
@@ -102,7 +103,7 @@ class BurgerCard extends StatelessWidget {
 
 class Burger {
   final String name;
-  final int img;
+  final img;
   final int kcal;
   Burger(
     this.name,

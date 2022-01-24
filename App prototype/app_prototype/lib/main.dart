@@ -22,7 +22,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  final db = FirebaseFirestore.instance.doc("/Data/ZqaA5SR06h9mGHgl7sDE").snapshots();
+  final db =
+      FirebaseFirestore.instance.doc("/Data/ZqaA5SR06h9mGHgl7sDE").snapshots();
   dynamic doc;
 
   MyApp({Key? key}) : super(key: key);
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(primaryColor: configurations.mainColor),
             home: Scaffold(
               body: Center(
-                child: Text(snapshot.error.toString(), textDirection: TextDirection.ltr),
+                child: Text(snapshot.error.toString(),
+                    textDirection: TextDirection.ltr),
               ),
             ),
           );
@@ -55,7 +57,8 @@ class MyApp extends StatelessWidget {
                           AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
                               snapshot) {
                         if (!snapshot.hasData) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                         doc = snapshot.data!.data();
                         if (doc != null) {
@@ -92,7 +95,8 @@ class LogoAnimation extends StatefulWidget {
   const LogoAnimation({Key? key}) : super(key: key);
 
   @override
-  _AnimatedRotatingGalaxyDemoState createState() => _AnimatedRotatingGalaxyDemoState();
+  _AnimatedRotatingGalaxyDemoState createState() =>
+      _AnimatedRotatingGalaxyDemoState();
 }
 
 class _AnimatedRotatingGalaxyDemoState extends State<LogoAnimation>
@@ -126,11 +130,14 @@ class _AnimatedRotatingGalaxyDemoState extends State<LogoAnimation>
           RotationTransition(
             turns: _rotation,
             child: Container(
-              width: 100,
-              height: 100,
+              width: 150,
+              height: 150,
               padding: const EdgeInsets.all(10),
               color: Colors.blue,
-              child: const Center(child: Text("Logo")),
+              child: const Center(
+                  child: Image(
+                image: AssetImage('assets/logo.png'),
+              )),
             ),
           ),
           const SizedBox(height: 50),
