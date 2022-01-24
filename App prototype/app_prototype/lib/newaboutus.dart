@@ -64,6 +64,9 @@ class ProfileMiniature extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: InkWell(
+        child: Image(
+          image: AssetImage(profileImage),
+        ),
         onTap: () {
           print("tapped profile");
           Navigator.of(context).push(
